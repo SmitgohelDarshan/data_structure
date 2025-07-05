@@ -1,7 +1,8 @@
 /*
-WAP to perform given operation in the linked list. There exist a Linked List. Add 
-a node that contains the GCD of that two nodes between every pair adjacent 
-node of Linked List.  18 -> 6 -> 10 -> 3  output: 18->6->6->2->10->1->3
+Write a program to swap two consecutive nodes in the linked list. Don’t change 
+the values of nodes, implement by changing the link of the nodes. 
+• Input: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 
+• Output: 2 → 1 → 4 → 3 → 6 → 5 → 8 → 7 
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,29 +27,28 @@ struct node* insertAtLast(struct node* head, int value) {
     return head;
 }
 
-int findgcd(int a, int b) { 
-    while (b != 0) {
-        int t = a % b;
-        a = b;
-        b = t;
-    }
-    return a;
-}
+struct node* consecutive(struct node* head)
+{
+    if (!head || !head->link) return head;   
 
-struct node* gcdLL(struct node* head){
-    struct node* curr;
+    struct node* prev  = NULL;
+    struct node* first = head;               
+    struct node* second = head->link;        
 
-    for (curr = head; curr != NULL && curr->link != NULL; curr = curr->link) {                              
-        struct node* temp = curr->link;
+    head = second;                           
 
-        struct node* newNode = (struct node*)malloc(sizeof(struct node));
-        newNode->data = findgcd(curr->data, temp->data);
+    while (first && second) {
+        struct node* nextPair = second->link;
 
-        curr->link = newNode;
-        newNode->link = temp;
+        second->link = first;                
+        first->link  = nextPair;    //2->1->3
 
-        // move to the next ORIGINAL node, skipping the gcd node 
-        curr = newNode;
+        if (prev) prev->link = second;
+
+        prev   = first;
+        first  = nextPair;                   
+        if (first)
+            second = first->link;            
     }
     return head;
 }
@@ -75,8 +75,7 @@ void main() {
     printf("Original : ");
     printLL(head);
 
-    head = gcdLL(head);
-
-    printf("After GCD: ");
+    printf("Consecutive: ");
+    head = consecutive(head);
     printLL(head);
 }
