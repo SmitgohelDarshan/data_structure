@@ -46,7 +46,6 @@ void deleteAlternate(){
         temp = prev->rpter;
         if(temp != NULL)    temp = temp->rpter;
     }
-    // head = prev;
 }
 
 void printLL() {
