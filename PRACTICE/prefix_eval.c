@@ -44,7 +44,7 @@ void evaluate_prefix(char prefix[]){
 
 void main(){
     char prefix[100];
-    printf("Enter a posfix expression :");
+    printf("Enter a prefix expression :");
     scanf("%s",prefix);
     strrev(prefix);
     evaluate_prefix(prefix);
