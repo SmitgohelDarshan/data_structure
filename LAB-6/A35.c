@@ -39,7 +39,7 @@ void main() {
     while (NEXT != '\0' && NEXT != 'c') {
         if (NEXT == ' ') {
             printf("Invalid String (space before 'c')");
-            return;fd
+            return;
         }
         push(NEXT);
         NEXT = str[i++];
