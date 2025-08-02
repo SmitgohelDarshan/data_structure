@@ -57,7 +57,7 @@ struct Node* buildFromPreIn(int preorder[], int inorder[], int inStart, int inEn
 }
 
 void printInorder(struct Node* root) {
-    if (root) {
+    if (root != NULL) {
         printInorder(root->left);
         printf("%d ", root->data);
         printInorder(root->right);
@@ -71,7 +71,7 @@ int main() {
     int inorder[]    = {4, 2, 5, 1, 6, 3};
     int postorder[]  = {4, 5, 2, 6, 3, 1};
     int preorder[]   = {1, 2, 4, 5, 3, 6};
-    int n = sizeof(inorder);
+    int n = sizeof(inorder) / sizeof(inorder[0]);
 
     while (1) {
         printf("\n--- Binary Tree Construction Menu ---\n");
